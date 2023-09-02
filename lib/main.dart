@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lifecycle/lifecycle.dart';
 import 'package:projetct_quiz_god/src/models/providers/game_jornada_provider.dart';
 import 'package:projetct_quiz_god/src/models/providers/game_provider.dart';
 import 'package:projetct_quiz_god/src/ui/pages/tela_inicial.dart';
@@ -10,6 +11,7 @@ void main() {
     providers: [
       ChangeNotifierProvider(create: (context) => GameProvider()),
       ChangeNotifierProvider(create: (context) => GameJornadaProvider()),
+
     ],
     child: MyApp(),
   ));
@@ -25,6 +27,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      navigatorObservers: [defaultLifecycleObserver],
       title: 'Flutter Demo',
       theme: ThemeData(
         snackBarTheme: customSnackBarTheme,

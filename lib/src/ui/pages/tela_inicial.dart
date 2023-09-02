@@ -1,6 +1,8 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:lifecycle/lifecycle.dart';
 import 'package:projetct_quiz_god/src/models/providers/game_provider.dart';
+import 'package:projetct_quiz_god/src/models/services/impl/AmbientMusicServiceImpl.dart';
 import 'package:projetct_quiz_god/src/ui/util/color/Style_guide.dart';
 import 'package:projetct_quiz_god/src/ui/pages/page_settings.dart';
 import 'package:projetct_quiz_god/src/ui/pages/page_start_game.dart';
@@ -9,42 +11,48 @@ import 'package:projetct_quiz_god/src/ui/widgets/button_commun.dart';
 import 'package:projetct_quiz_god/src/ui/widgets/widget_logo.dart';
 import 'package:provider/provider.dart';
 
-class Tela_inicial extends StatefulWidget {
+class Tela_inicial extends StatefulWidget  {
   const Tela_inicial({Key? key}) : super(key: key);
 
   @override
   State<Tela_inicial> createState() => _Tela_inicialState();
 }
 
-class _Tela_inicialState extends State<Tela_inicial> {
+class _Tela_inicialState extends State<Tela_inicial> with WidgetsBindingObserver{
+  final audioService = AmbientMusicaServiceImpl();
   AudioPlayer? player;
+  bool isBackground = false;
 
-  void _runAudio(String path) async {
-    print("Iniciando música");
-    try {
-      await player?.play(
-        AssetSource(path),
-        volume: 1, // Volume (0.0 a 1.0)
-
-         // Modo de loop infinito
-      );
-    } catch (error) {
-      print(error.toString());
-    }
-  }
 
   @override
   void initState() {
-    player = AudioPlayer();
-    _runAudio("d.mp3");
+    WidgetsBinding.instance.addObserver(this);
+    audioService.runAudio("d.mp3");
     super.initState();
   }
+
+  @override
+  void dispose() {
+  WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    setState(() {
+      isBackground = (state != AppLifecycleState.resumed);
+      isBackground ? audioService.stopAudio() : audioService.resumeAudio();
+
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+  final gameProvider = Provider.of<GameProvider>(context);
 
      initNewGame(){
       print("Iniicnado new GAme");
-      final gameProvider = context.read<GameProvider>();
       gameProvider.iniciarNovoJogo();
       gameProvider.addTips();
     }
