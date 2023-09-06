@@ -16,7 +16,7 @@ O objetivo principal do jogo é adivinhar corretamente a identidade de personage
 
 Para tornar o jogo mais interessante, os jogadores podem adquirir habilidades especiais que os ajudarão a resolver os enigmas e identificar os personagens com mais facilidade. Abaixo estão algumas das habilidades especiais disponíveis:
 
-1.	Habilidade de Revelação Divina: Permite ao jogador receber uma dica adicional diretamente de uma "fonte divina" para esclarecer a identidade do personagem.
+1.	##Habilidade de Revelação Divina:## Permite ao jogador receber uma dica adicional diretamente de uma "fonte divina" para esclarecer a identidade do personagem.
 2.	Conhecimento de Contexto Histórico: Permite ao jogador acessar informações históricas para contextualizar as dicas e fazer conexões mais precisas.
 3.	Intuição Espiritual: Permite ao jogador fazer uma pergunta direta sobre o personagem após receber uma dica, obtendo uma resposta sim ou não.
 4.	Capacidade de Tradução de Idiomas Antigos: Ajuda o jogador a decifrar dicas em idiomas antigos ou obscuros encontrados em textos bíblicos.
